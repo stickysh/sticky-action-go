@@ -1,4 +1,4 @@
-package gowrapper
+package wrapper
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ type Action struct {
 	handler interface{}
 }
 
-func NewAction(handler interface{}) *Action{
+func NewAction(handler interface{}) *Action {
 	return &Action{
 		handler: handler,
 	}
@@ -74,7 +74,6 @@ func (ac *Action) Invoke(input []byte, out *[]byte) error {
 		Payload: encoded,
 	}
 
-
 	encResp, err := json.Marshal(resp)
 	if err != nil {
 
@@ -83,8 +82,6 @@ func (ac *Action) Invoke(input []byte, out *[]byte) error {
 	*out = encResp
 	return nil
 }
-
-
 
 func Start(handler interface{}) {
 	fd := os.Getenv("CTRL_INT_SOCKET")
@@ -106,4 +103,3 @@ func Start(handler interface{}) {
 		log.Fatal(err)
 	}
 }
-
